@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>书荒雷达</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Novel Search Shelf</p>
+        <h1>书荒雷达</h1>
+      </div>
+      <p class="top-note">本机自用 · 只做找书索引 · 支持正版</p>
+    </header>
+
+    <main class="layout">
+      <section class="search-panel" aria-label="搜索小说">
+        <div class="search-row">
+          <label class="search-box">
+            <span>搜索标签、书名、作者、简介</span>
+            <input id="searchInput" type="search" placeholder="例如：bg 老实人 外星人 晋江" autocomplete="off" />
+          </label>
+          <label class="select-box">
+            <span>平台</span>
+            <input id="platformFilter" placeholder="晋江 / 起点 / 番茄" />
+          </label>
+          <label class="select-box">
+            <span>状态</span>
+            <select id="statusFilter">
+              <option value="">全部状态</option>
+              <option value="想看">想看</option>
+              <option value="在看">在看</option>
+              <option value="已看">已看</option>
+              <option value="避雷">避雷</option>
+            </select>
+          </label>
+        </div>
+
+        <div id="tagCloud" class="tag-cloud" aria-label="常用标签"></div>
+
+        <div class="toolbar">
+          <p id="resultCount"></p>
+          <div class="sort-group" role="group" aria-label="排序">
+            <button class="sort-button active" data-sort="match" type="button">匹配度</button>
+            <button class="sort-button" data-sort="rating" type="button">评分</button>
+            <button class="sort-button" data-sort="recent" type="button">最近加入</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="bookGrid" class="book-grid" aria-label="小说列表"></section>
+
+      <aside class="side-panel" aria-label="录入小说">
+        <section class="panel-section">
+          <h2>新增书目</h2>
+          <form id="bookForm" class="book-form">
+            <label>
+              <span>书名</span>
+              <input name="title" required placeholder="书名" />
+            </label>
+            <label>
+              <span>作者</span>
+              <input name="author" placeholder="待补充" />
+            </label>
+            <label>
+              <span>平台</span>
+              <input name="platform" placeholder="晋江 / 起点 / 番茄 / 长佩" />
+            </label>
+            <label>
+              <span>简介</span>
+              <textarea name="summary" rows="4" placeholder="简介或推荐语，不放正文"></textarea>
+            </label>
+            <label>
+              <span>官方标签</span>
+              <input name="officialTags" placeholder="平台页面自带标签，用逗号分隔" />
+            </label>
+            <label>
+              <span>我的标签</span>
+              <input name="userTags" placeholder="例如：老实人女主，外星人" />
+            </label>
+            <div class="form-row">
+              <label>
+                <span>状态</span>
+                <select name="status">
+                  <option>想看</option>
+                  <option>在看</option>
+                  <option>已看</option>
+                  <option>避雷</option>
+                </select>
+              </label>
+              <label>
+                <span>正版链接</span>
+                <input name="officialUrl" type="url" placeholder="可选" />
+              </label>
+            </div>
+            <button class="primary-button" type="submit">加入书库</button>
+          </form>
+        </section>
+
+        <section class="panel-section">
+          <h2>粘贴推书文本</h2>
+          <p class="hint">适合先贴 Obsidian Markdown。书名用《》包起来，同一段里的书会建立同类推荐关系。</p>
+          <textarea id="bulkText" rows="8" placeholder="《书名》&#10;作者：作者名&#10;平台：晋江&#10;官方标签：幻想未来，情有独钟&#10;标签：bg，老实人女主&#10;简介：..."></textarea>
+          <button id="importButton" class="secondary-button" type="button">导入文本</button>
+          <p id="importMessage" class="hint"></p>
+        </section>
+      </aside>
+    </main>
+
+    <template id="bookCardTemplate">
+      <article class="book-card">
+        <div class="card-head">
+          <div>
+            <p class="source"></p>
+            <h3></h3>
+          </div>
+          <span class="rating"></span>
+        </div>
+        <p class="meta"></p>
+        <p class="summary"></p>
+        <div class="tag-block official-tags"></div>
+        <div class="tag-block user-tags"></div>
+        <div class="tag-block community-tags"></div>
+        <div class="similar"></div>
+        <div class="card-actions">
+          <a class="book-link" target="_blank" rel="noreferrer">正版链接</a>
+        </div>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>

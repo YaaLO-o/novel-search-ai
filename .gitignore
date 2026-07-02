@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Database (contains personal book data)
+data/*.sqlite
+data/*.sqlite-journal
+data/*.sqlite-wal
+data/*.sqlite-shm
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
