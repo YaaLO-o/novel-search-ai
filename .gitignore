@@ -7,6 +7,14 @@ data/*.sqlite-journal
 data/*.sqlite-wal
 data/*.sqlite-shm
 
+# Data directories (large files, personal data)
+data/raw/
+data/tags/
+
+# Crawler data (large JSON files, personal crawl data)
+crawler/data/raw/
+crawler/original/jjcrawler/jjcrawler/spiders/*.pyc
+
 # OS files
 .DS_Store
 Thumbs.db

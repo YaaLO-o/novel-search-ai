@@ -1,0 +1,52 @@
+from pathlib import Path
+from .utils import get_file_name, get_heading, format_body
+
+
+def create_desc_txt(directory: Path, novel, quiet=False):
+    if not quiet:
+        print(f"下载 {novel["title"]} 文案 中...")
+    file_name = "文案"
+    output_path = directory / f"{file_name}.txt"
+    description_txt = open(output_path, "w", encoding="utf-8")
+
+    for paragraph in novel["desc"]:
+        description_txt.write(paragraph + "\n")
+
+    description_txt.write("\n")
+
+    genre = "文章类型： " + novel["genre"]
+    description_txt.write(genre + "\n")
+
+    tags = "内容标签： " + " ".join(novel["tag_list"])
+    description_txt.write(tags + "\n")
+
+    description_txt.write(novel["oneliner"] + "\n")
+
+    description_txt.write(novel["meaning"] + "\n")
+
+    description_txt.close()
+
+
+def create_chapter_txt(directory: Path, novel_title, chapter, quiet=False):
+    file_name = get_file_name(chapter)
+    file_name = file_name.replace('\t', '')
+    if not quiet:
+        print(f"下载 {novel_title} {file_name} 中...")
+
+    output_path = directory / f"{file_name}.txt"
+    chapter_txt = open(output_path, "w", encoding="utf-8")
+
+    heading = get_heading(chapter)
+    chapter_txt.write(heading + "\n\n")
+
+    for paragraph in format_body(chapter["body"]):
+        chapter_txt.write(paragraph + "\n")
+
+    if "author_said" in chapter:
+        author_said = chapter["author_said"]
+        if author_said:
+            chapter_txt.write("\n")
+            for author_said_p in author_said:
+                chapter_txt.write(author_said_p + "\n")
+
+    chapter_txt.close()
