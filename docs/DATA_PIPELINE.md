@@ -133,7 +133,7 @@ bookIds = [1, 2, 3]
 
 - **爬虫**: Scrapy 框架，基于 [jjwxc-crawler](https://github.com/dev-chenxing/jjwxc-crawler) 改造
 - **数据量**: 1125 本独立小说元数据（已去重合并）
-- **数据位置**: `crawler/data/raw/jjwxc/2026-07-03/*.json`
+- **数据位置**: `data/novels_jjwxc.jsonl`（单个JSONL文件，2.51MB）
 - **进度文件**: `crawler/data/raw/jjwxc/crawl_progress_unified.json`
 - **限制**: bookbase.php 需要登录，当前只能爬取游客可访问的部分
 
